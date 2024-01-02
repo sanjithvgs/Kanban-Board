@@ -1,0 +1,164 @@
+:root{
+    --light-red: #fc7777;
+}
+
+header{
+	display:flex;
+	width:100%;
+	height:100px;
+	background-color:aqua;
+	}
+	
+.category-top{
+	display:flex;
+	width:50%;
+	padding:15px;
+	gap:50px;
+	}
+	
+.category{
+	border-radius:10px;
+	width:150px;
+    box-sizing: border-box;
+	}
+
+.category-top .category:hover{    
+    border: 2px solid white;
+   }
+	
+/* .category-top .category:hover{    
+    border: 2px solid white;
+   } */
+
+
+.add:hover{
+    background-color:lightgreen;
+    cursor:pointer;
+}
+
+.delete:hover{
+    background-color: var(--light-red);
+    cursor:pointer;
+}
+
+.p1{
+	background-color:pink;
+	}
+	
+.p2{
+	background-color:blue;
+	}
+	
+.p3{
+	background-color:lightgreen;
+	}
+	
+.p4{
+	background-color:black;
+	}
+	
+.action{
+	display:flex;
+	width:50%;
+	border: 15px solid aqua;
+	background-color:lightblue;
+	gap:75px;
+	padding:15px;
+	text-align:center;
+	font-size:25px;
+	}
+	
+.add{
+	color:green;
+	width:200px;
+	border: 5px solid green;
+	border-radius:15px;
+	}
+	
+.delete{
+	color:red;
+	width:200px;
+	border: 5px solid red;
+	border-radius:15px;
+	}
+
+
+.model{
+    background-color: gray;
+    width: 50%;
+    min-width: 400px;
+    min-height: 300px;
+    position: fixed;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    border-radius: 5px;
+}
+
+.model.hide{
+    display: none;
+}
+
+.left{
+    flex-grow: 1;
+}
+
+.right{
+    flex-basis: 100px;
+    padding: 15px;
+}
+
+.left textarea{
+    width: 100%;
+    height: 99%;
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.right .category{
+    width: 100%;
+    height: 50px;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+}
+
+.all-task{
+    display: block;
+}
+
+.all-task .task{
+    display: inline-block;
+    width: 200px;
+    height: 150px;
+    padding: 50px;
+}
+
+.all-task .task .task-category{
+    width: 100%;
+    height: 15px;
+    background-color: black;
+}
+
+.all-task .task .task-id{
+    width: 100%;
+    height: 25px;
+   
+    background-color: blueviolet;
+    box-sizing: border-box;
+}
+
+.all-task .task .task-title{
+    width: 100%;
+    height:100px;
+    background-color: blanchedalmond;
+    
+}
+
+
