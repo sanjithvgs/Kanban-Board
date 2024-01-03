@@ -1,3 +1,7 @@
+body{
+    background-color: #474444;
+}
+
 :root{
     --light-red: #fc7777;
 }
@@ -121,6 +125,11 @@ header{
 .right .category{
     width: 100%;
     height: 50px;
+    
+}
+
+.right .category.selected{
+    border: 5px solid red;
 }
 
 .right{
@@ -138,12 +147,16 @@ header{
     width: 200px;
     height: 150px;
     padding: 50px;
+    position: relative;
+}
+
+.all-task .task.hide{
+    display: none;
 }
 
 .all-task .task .task-category{
     width: 100%;
     height: 15px;
-    background-color: black;
 }
 
 .all-task .task .task-id{
@@ -157,8 +170,12 @@ header{
 .all-task .task .task-title{
     width: 100%;
     height:100px;
-    background-color: blanchedalmond;
+    background-color: yellow;
     
 }
 
-
+.all-task .delete-icon{
+    position: absolute;
+    right: 55px;
+    bottom:65px;
+}
