@@ -55,6 +55,7 @@ txtareaRef.addEventListener('keydown',function(e){
 function createTask(taskdata){
     const task=document.createElement('div');
     task.className='task';
+    taskRef.dataset.id=task.id;
     task.innerHTML=`
     <div class="task-category ${taskdata.category}"></div>
     <div class="task-id">${taskdata.id}</div>
@@ -63,14 +64,13 @@ function createTask(taskdata){
     `;
 
     taskRef.appendChild(task);
-    const deleteiconRef=task.querySelector('.delete-icon');
-    deleteiconRef.addEventListener('click',function(e){
-        const selectTask=e.target.closest('.task');
-        // selectTask.classList.add('hide');   => not recommended 
-        selectTask.remove();
-        deleteTaskfromData(taskdata.id);
-        console.log(tasks);
-    });
+    // const deleteiconRef=task.querySelector('.delete-icon');
+    // deleteiconRef.addEventListener('click',function(e){
+    //     const selectTask=e.target.closest('.task');
+    //     // selectTask.classList.add('hide');   => not recommended 
+    //     selectTask.remove();
+    //     deleteTaskfromData(taskdata.id);
+    // });
 
 }
 
@@ -92,3 +92,22 @@ function deleteTaskfromData(taskid){
     tasks.splice(selectedTask,1);
 
 };
+
+taskRef.addEventListener('click',function(e){
+    console.log(e.target.classList.contains('fa-trash'))
+    if (e.target.classList.contains('fa-trash-can')){
+        const currenttaskRef=e.target.closest('.task');
+        currenttaskRef.remove();
+        const taskID=currenttaskRef.dataset.id;
+        deleteTaskfromData(taskID);
+        // deleteTaskfromData(taskdata.id);
+    }
+})
+
+function getNextPriority(currentPriority){
+    const prioritiList=['p1','p2','p3','p4'];
+    const currentPriorityIdx=prioritiList.findIndex((p)=> p===currentPriority);
+
+    const nextPriority=(currentPriority+1)%4 ;
+    return nextPriority;
+}
