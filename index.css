@@ -60,6 +60,22 @@ header{
 .p4{
 	background-color:black;
 	}
+
+[data-priority="p1"]{
+    background-color:pink;
+    }
+    
+[data-priority="p2"]{
+    background-color:blue;
+    }
+    
+[data-priority="p3"]{
+    background-color:lightgreen;
+    }
+    
+[data-priority="p4"]{
+    background-color:black;
+    }    
 	
 .action{
 	display:flex;

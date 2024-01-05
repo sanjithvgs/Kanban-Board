@@ -14,7 +14,7 @@ const taskdeleteRef=document.querySelectorAll('.all-task .task .delete-icon .fa-
 // const taskcategoryRef=document.querySelectorAll(.right .category);
 
 addRef.addEventListener('click',function(e){
-    tooglemodle();
+    togglemodle();
 });
 
 function defaultCategorySelection() {
@@ -23,7 +23,7 @@ function defaultCategorySelection() {
     firstCategory.classList.add('selected');
 }
 
-function tooglemodle(){
+function togglemodle(){
     const isHidden=mdlRef.classList.contains('hide');
     if (isHidden){
         mdlRef.classList.remove('hide');
@@ -34,7 +34,21 @@ function tooglemodle(){
     }
 }
 
-const tasks=[];
+// const tasks=[];
+const tasks=JSON.parse(localStorage.getItem('tasks') || []);
+
+function renderTaskList(){
+    tasks.forEach((task) => {
+        createTask(task);
+    })
+}
+
+renderTaskList();
+
+function addTasksInLocal(newTask){
+    tasks.push(newTask);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 
 txtareaRef.addEventListener('keydown',function(e){
     if (e.key=="Enter"){
@@ -45,8 +59,8 @@ txtareaRef.addEventListener('keydown',function(e){
             title:e.target.value,
             category: selectCategoryName
         };
-        tasks.push(newTask);
-        tooglemodle();
+        addTasksInLocal(newTask);
+        togglemodle();
         e.target.value="";
         createTask(newTask);
     }
@@ -55,9 +69,9 @@ txtareaRef.addEventListener('keydown',function(e){
 function createTask(taskdata){
     const task=document.createElement('div');
     task.className='task';
-    taskRef.dataset.id=task.id;
+    task.dataset.id=taskdata.id;
     task.innerHTML=`
-    <div class="task-category ${taskdata.category}"></div>
+    <div class="task-category" data-priority="${taskdata.category}"></div>
     <div class="task-id">${taskdata.id}</div>
     <div class="task-title">${taskdata.title}</div>
     <div class="delete-icon"><i class="fa-solid fa-trash-can"></i></div>
@@ -87,27 +101,34 @@ function removeSelection(){
     })
 }
 
-function deleteTaskfromData(taskid){
-    const selectedTask=tasks.findIndex((task)=> task.id===taskid);
-    tasks.splice(selectedTask,1);
+function deleteTaskfromData(taskID){
+    const selectedTaskIdx=tasks.findIndex((task) => Number(task.id)===Number(taskID));
+    tasks.splice(selectedTaskIdx,1);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 
 };
 
 taskRef.addEventListener('click',function(e){
-    console.log(e.target.classList.contains('fa-trash'))
     if (e.target.classList.contains('fa-trash-can')){
         const currenttaskRef=e.target.closest('.task');
         currenttaskRef.remove();
-        const taskID=currenttaskRef.dataset.id;
+        const taskID=currenttaskRef.dataset.id;  //we can use dataset only if classname start with "data-"
         deleteTaskfromData(taskID);
-        // deleteTaskfromData(taskdata.id);
+    }
+
+    if (e.target.classList.contains('task-category')){
+        const currentPriority=e.target.dataset.priority;
+        const nextPriority=getNextPriority(currentPriority);
+        e.target.dataset.priority=nextPriority;
     }
 })
+
+
 
 function getNextPriority(currentPriority){
     const prioritiList=['p1','p2','p3','p4'];
     const currentPriorityIdx=prioritiList.findIndex((p)=> p===currentPriority);
 
-    const nextPriority=(currentPriority+1)%4 ;
-    return nextPriority;
+    const nextPriorityIdx=(currentPriorityIdx+1)%4 ;
+    return prioritiList[nextPriorityIdx];
 }
