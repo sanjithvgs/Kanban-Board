@@ -9,7 +9,7 @@ const rightcategoryRef=document.querySelectorAll('.right .category');
 
 const taskdeleteRef=document.querySelectorAll('.all-task .task .delete-icon .fa-solid');
 
-
+const categorytopRef=document.querySelector('.category-top');
 
 // const taskcategoryRef=document.querySelectorAll(.right .category);
 
@@ -120,8 +120,17 @@ taskRef.addEventListener('click',function(e){
         const currentPriority=e.target.dataset.priority;
         const nextPriority=getNextPriority(currentPriority);
         e.target.dataset.priority=nextPriority;
+        const taskId=Number(e.target.closest('.task').dataset.id);
+        updatePriorityinData(taskId,nextPriority);
     }
 })
+
+function updatePriorityinData(taskId,nextPriority){
+    const taskIndex=tasks.findIndex(task =>(task.id===taskId));
+    tasks[taskIndex].category=nextPriority;
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+
+}
 
 
 
@@ -131,4 +140,38 @@ function getNextPriority(currentPriority){
 
     const nextPriorityIdx=(currentPriorityIdx+1)%4 ;
     return prioritiList[nextPriorityIdx];
+}
+
+categorytopRef.addEventListener('click',function(e){
+    if (e.target.classList.contains('category')){
+        const selectedPriority=e.target.dataset.priority;
+
+        const taskListRef=document.querySelectorAll('.task');
+        taskListRef.forEach(taskRef => {
+            taskRef.classList.remove('hide');
+            const currentTaskPriority=taskRef.querySelector('.task-category').dataset.priority;
+            if(currentTaskPriority !== selectedPriority){
+                taskRef.classList.add('hide');
+            } 
+        })
+    }
+});
+
+dltRef.addEventListener('click',function(e){
+    const isDeleteEnable=e.target.classList.contains('enabled');
+    if (isDeleteEnable){
+        e.target.classList.remove('enabled');
+        toggleDeleteIcon(false);
+    }
+    else{
+        e.target.classList.add('enabled');
+        toggleDeleteIcon(true);
+    }
+})
+
+function toggleDeleteIcon(visible){
+    const alldeleteRef=document.querySelectorAll('.delete-icon');
+    alldeleteRef.forEach(deleteRef => {
+        deleteRef.style.display=visible ? "block" : "none";
+    })
 }

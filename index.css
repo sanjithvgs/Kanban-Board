@@ -40,10 +40,14 @@ header{
     cursor:pointer;
 }
 
-.delete:hover{
+.delete.enabled{
     background-color: var(--light-red);
-    cursor:pointer;
 }
+	
+
+/* .delete:hover{
+    
+} */
 
 .p1{
 	background-color:pink;
@@ -94,9 +98,10 @@ header{
 	border: 5px solid green;
 	border-radius:15px;
 	}
-	
+
 .delete{
-	color:red;
+    cursor:pointer;
+    color:red;
 	width:200px;
 	border: 5px solid red;
 	border-radius:15px;
@@ -194,4 +199,5 @@ header{
     position: absolute;
     right: 55px;
     bottom:65px;
+    display: none;
 }
