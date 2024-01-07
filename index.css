@@ -195,9 +195,20 @@ header{
     
 }
 
+.all-task .task .task-title textarea{
+    width: 97%;
+    height:95%;
+    background-color: transparent;
+    
+}
+
 .all-task .delete-icon{
     position: absolute;
     right: 55px;
     bottom:65px;
+    /* display: none; */
+}
+
+[data-delete-enabled="true"] .task .delete-icon{
     display: none;
 }

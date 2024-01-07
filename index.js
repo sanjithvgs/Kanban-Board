@@ -73,7 +73,7 @@ function createTask(taskdata){
     task.innerHTML=`
     <div class="task-category" data-priority="${taskdata.category}"></div>
     <div class="task-id">${taskdata.id}</div>
-    <div class="task-title">${taskdata.title}</div>
+    <div class="task-title"><textarea>${taskdata.title}</textarea></div>
     <div class="delete-icon"><i class="fa-solid fa-trash-can"></i></div>
     `;
 
@@ -161,17 +161,19 @@ dltRef.addEventListener('click',function(e){
     const isDeleteEnable=e.target.classList.contains('enabled');
     if (isDeleteEnable){
         e.target.classList.remove('enabled');
-        toggleDeleteIcon(false);
+        // toggleDeleteIcon(false);
+        taskRef.dataset.deleteEnabled=true;
     }
     else{
         e.target.classList.add('enabled');
-        toggleDeleteIcon(true);
+        // toggleDeleteIcon(true);
+        taskRef.dataset.deleteEnabled=false;
     }
 })
 
-function toggleDeleteIcon(visible){
-    const alldeleteRef=document.querySelectorAll('.delete-icon');
-    alldeleteRef.forEach(deleteRef => {
-        deleteRef.style.display=visible ? "block" : "none";
-    })
-}
+// function toggleDeleteIcon(visible){
+//     const alldeleteRef=document.querySelectorAll('.delete-icon');
+//     alldeleteRef.forEach(deleteRef => {
+//         deleteRef.style.display=visible ? "block" : "none";
+//     })
+// }
