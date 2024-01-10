@@ -83,7 +83,7 @@ header{
 	
 .action{
 	display:flex;
-	width:50%;
+	width:25%;
 	border: 15px solid aqua;
 	background-color:lightblue;
 	gap:75px;
@@ -220,3 +220,9 @@ header{
     pointer-events: all;
 }
 
+header .task-search input{
+        margin: 25px;
+        height: 35px;
+        width: 75%;
+        font-size: 16px;
+    }

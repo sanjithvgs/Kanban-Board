@@ -11,6 +11,8 @@ const taskdeleteRef=document.querySelectorAll('.all-task .task .delete-icon .fa-
 
 const categorytopRef=document.querySelector('.category-top');
 
+const taskSearchRef = document.querySelector('.task-search input');
+
 // const taskcategoryRef=document.querySelectorAll(.right .category);
 
 addRef.addEventListener('click',function(e){
@@ -78,13 +80,14 @@ function createTask(taskdata){
     `;
 
     taskRef.appendChild(task);
-    // const deleteiconRef=task.querySelector('.delete-icon');
-    // deleteiconRef.addEventListener('click',function(e){
-    //     const selectTask=e.target.closest('.task');
-    //     // selectTask.classList.add('hide');   => not recommended 
-    //     selectTask.remove();
-    //     deleteTaskfromData(taskdata.id);
-    // });
+    const textareaRef=task.querySelector('.task-title textarea');
+
+    textareaRef.addEventListener('change',function(e){
+        const updatedTitle=e.target.value;
+        const currentTaskId=taskdata.id;
+        updatedTitleinData(updatedTitle,currentTaskId);
+
+    })
 
 }
 
@@ -99,6 +102,16 @@ function removeSelection(){
     rightcategoryRef.forEach(function(element){
         element.classList.remove("selected");
     })
+}
+
+function updatedTitleinData(updatedTitle,taskID){
+    const selectedTaskIdx=tasks.findIndex((task) => Number(task.id)===Number(taskID));
+
+    const selectedTask=tasks[selectedTaskIdx]; 
+    selectedTask.title=updatedTitle;
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+
 }
 
 function deleteTaskfromData(taskID){
@@ -177,3 +190,7 @@ dltRef.addEventListener('click',function(e){
 //         deleteRef.style.display=visible ? "block" : "none";
 //     })
 // }
+
+taskSearchRef.addEventListener('keyup',function(e){
+    console.log(e.target.value);
+})
