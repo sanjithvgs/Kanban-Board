@@ -192,5 +192,19 @@ dltRef.addEventListener('click',function(e){
 // }
 
 taskSearchRef.addEventListener('keyup',function(e){
-    console.log(e.target.value);
+    taskRef.innerHTML="";
+
+    //In-memory Data
+    tasks.filter(task => {
+        const currentTitle = task.title.toLowerCase();
+        const searchText = e.target.value.toLowerCase();
+        const taskId = String(task.id); 
+        if(searchText.trim() === "" ||
+           currentTitle.includes(searchText) || 
+           taskId.includes(searchText)){
+            
+            createTask(task)
+        }
+    })
+
 })
